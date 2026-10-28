@@ -47,10 +47,7 @@ html.is-scrolled .site-nav a:hover{color:#025B97;}
 html.is-scrolled .header-cta{background:#003F6B;color:#FFFFFF;padding:10px 18px;font-size:14px;}
 html.is-scrolled .header-cta:hover{background:#025B97;color:#FFFFFF;}
 .site-header-spacer{height:0;overflow:hidden;}
-@media (max-width:900px){
-  .header-inner{grid-template-columns:1fr;justify-items:center;}
-  .site-nav{gap:14px 22px;}
-}
+@media (max-width:900px){/* header handled by responsive.css */}
 
 .svc-row{
   display:grid;grid-template-columns:64px 1fr 48px;gap:20px;padding:34px 0;

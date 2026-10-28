@@ -79,9 +79,7 @@ html.is-scrolled .site-header-spacer{height:0;}
 .page-breadcrumb a{color:#4D4E53;}
 .page-breadcrumb a:hover{color:#025B97;}
 .page-breadcrumb .sep{color:#B59F61;}
-@media (max-width:900px){
-  .header-inner{grid-template-columns:1fr;justify-items:center;}
-}
+@media (max-width:900px){/* header handled by responsive.css */}
 
 .site-logo{position:relative;display:inline-flex;align-items:center;}
 .site-logo img.logo-on-dark{display:block;height:75px;width:auto;object-fit:contain;transition:height .3s ease,opacity .2s ease;}

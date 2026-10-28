@@ -1,12 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { responsiveCss } from "@/styles/responsive";
 
 type Props = {
   html: string;
   css?: string;
   page?: string;
 };
+
+const NAV_TOGGLE_HTML =
+  '<button type="button" class="nav-toggle" aria-controls="siteNav" aria-expanded="false" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>';
 
 function parseStyleHover(raw: string): Record<string, string> {
   const out: Record<string, string> = {};
@@ -20,8 +24,31 @@ function parseStyleHover(raw: string): Record<string, string> {
   return out;
 }
 
+/** Inject hamburger control + nav id without rewriting every generated page. */
+function enhanceHeaderHtml(source: string): string {
+  let out = source;
+  if (!out.includes('id="siteNav"') && !out.includes("id='siteNav'")) {
+    out = out.replace(
+      /<nav class="site-nav"/g,
+      '<nav class="site-nav" id="siteNav"'
+    );
+  }
+  if (!out.includes("nav-toggle")) {
+    out = out.replace(
+      /(<a href="\/" class="site-logo">[\s\S]*?<\/a>)/,
+      `$1${NAV_TOGGLE_HTML}`
+    );
+  }
+  return out;
+}
+
 export default function HtmlPage({ html, css = "", page = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const enhancedHtml = useMemo(() => enhanceHeaderHtml(html), [html]);
+  const combinedCss = useMemo(
+    () => `${css}\n${responsiveCss}`,
+    [css]
+  );
 
   useEffect(() => {
     const root = ref.current;
@@ -29,6 +56,44 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
 
     // style-hover parity with original DC runtime
     const cleanups: Array<() => void> = [];
+
+    // Mobile / tablet nav toggle
+    const setNavOpen = (open: boolean) => {
+      document.documentElement.classList.toggle("nav-open", open);
+      root.querySelectorAll<HTMLButtonElement>(".nav-toggle").forEach((btn) => {
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      });
+    };
+    setNavOpen(false);
+    const onToggleClick = (e: MouseEvent) => {
+      const btn = (e.target as Element | null)?.closest?.(".nav-toggle");
+      if (!btn || !root.contains(btn)) return;
+      e.preventDefault();
+      setNavOpen(!document.documentElement.classList.contains("nav-open"));
+    };
+    const onNavLinkClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.(".site-nav a, .header-cta");
+      if (!a || !root.contains(a)) return;
+      setNavOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setNavOpen(false);
+    };
+    const onResize = () => {
+      if (window.innerWidth > 1024) setNavOpen(false);
+    };
+    document.addEventListener("click", onToggleClick, true);
+    document.addEventListener("click", onNavLinkClick, true);
+    document.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+    cleanups.push(() => {
+      document.removeEventListener("click", onToggleClick, true);
+      document.removeEventListener("click", onNavLinkClick, true);
+      document.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+      document.documentElement.classList.remove("nav-open");
+    });
     root.querySelectorAll<HTMLElement>("[data-style-hover]").forEach((el) => {
       const hoverRaw = el.getAttribute("data-style-hover") || "";
       const hover = parseStyleHover(hoverRaw);
@@ -57,6 +122,10 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
     const onScroll = () => {
       const scrolled = (window.scrollY || 0) > (page === "home" ? 40 : 24);
       document.documentElement.classList.toggle("is-scrolled", scrolled);
+      document.body.classList.toggle("is-scrolled", scrolled);
+      root.querySelectorAll(".site-header").forEach((header) => {
+        header.classList.toggle("is-scrolled", scrolled);
+      });
       const logo = document.getElementById("siteLogo") as HTMLImageElement | null;
       if (logo) {
         logo.src = scrolled
@@ -66,7 +135,14 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    cleanups.push(() => window.removeEventListener("scroll", onScroll));
+    cleanups.push(() => {
+      window.removeEventListener("scroll", onScroll);
+      document.documentElement.classList.remove("is-scrolled");
+      document.body.classList.remove("is-scrolled");
+      root.querySelectorAll(".site-header").forEach((header) => {
+        header.classList.remove("is-scrolled");
+      });
+    });
 
     // FAQs open on home
     if (page === "home") {
@@ -286,13 +362,11 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
 
   return (
     <>
-      {css ? (
-        <style
-          data-wtbs-page-style={page || "page"}
-          dangerouslySetInnerHTML={{ __html: css }}
-        />
-      ) : null}
-      <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />
+      <style
+        data-wtbs-page-style={page || "page"}
+        dangerouslySetInnerHTML={{ __html: combinedCss }}
+      />
+      <div ref={ref} dangerouslySetInnerHTML={{ __html: enhancedHtml }} />
     </>
   );
 }
