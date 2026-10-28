@@ -2,7 +2,8 @@
 export const responsiveCss = `
 /* —— Base —— */
 html{scroll-behavior:smooth;}
-body{overflow-x:hidden;}
+/* clip (not hidden) so position:sticky keeps working */
+html,body{overflow-x:clip;}
 img,video,svg{max-width:100%;height:auto;}
 .nav-toggle{display:none;}
 
@@ -174,9 +175,11 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
 
   .faq-left{position:static !important;top:auto !important;}
   .svc-nav-aside{position:static !important;}
+  [data-screen-label="03 Services"] .svc-sticky-media{position:static !important;top:auto !important;}
   .overview-media{min-height:280px;aspect-ratio:4/3;}
   .find-col{border-right:0 !important;border-bottom:1px solid #CBCCCE;padding-bottom:28px;margin-bottom:20px;}
-  .find-col:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0;}
+  .find-us-band .find-col{border-bottom-color:rgba(255,255,255,0.18);}
+  .find-col:last-child{border-bottom:0 !important;margin-bottom:0;padding-bottom:8px;}
   .mission-split .media,.values-top .media{max-height:none !important;}
   .values-top .media{position:relative;aspect-ratio:5/4;min-height:0;}
 }
@@ -189,8 +192,10 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
 
 @media (max-width:700px){
   .form-grid{grid-template-columns:1fr !important;}
-  .svc-row{grid-template-columns:44px 1fr 28px !important;gap:12px !important;padding:22px 0;}
+  .svc-row{grid-template-columns:48px 1fr 28px !important;gap:12px !important;padding:22px 0;}
   .svc-row:hover{padding-left:10px;padding-right:10px;}
+  .svc-row .svc-icon{width:44px;height:44px;}
+  .svc-row .svc-icon img{width:36px;height:36px;}
   .team-card{grid-template-columns:1fr !important;}
   .who-stats{grid-template-columns:1fr !important;}
   [data-screen-label="07 Local"]{min-height:440px !important;}

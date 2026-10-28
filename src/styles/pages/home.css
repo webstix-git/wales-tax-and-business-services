@@ -50,7 +50,7 @@ html.is-scrolled .header-cta:hover{background:#025B97;color:#FFFFFF;}
 @media (max-width:900px){/* header handled by responsive.css */}
 
 .svc-row{
-  display:grid;grid-template-columns:64px 1fr 48px;gap:20px;padding:34px 0;
+  display:grid;grid-template-columns:72px 1fr 48px;gap:20px;padding:34px 0;
   border-bottom:1px solid #CBCCCE;color:#1F2A36;align-items:start;border-radius:8px;
   transition:background .45s ease,padding .45s ease,box-shadow .45s ease;
 }
@@ -59,8 +59,11 @@ html.is-scrolled .header-cta:hover{background:#025B97;color:#FFFFFF;}
   box-shadow:0 10px 28px rgba(0,42,75,.06);
 }
 .svc-row .svc-icon{
-  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;display:flex;align-items:center;justify-content:center;
   color:#B59F61;margin-top:2px;
+}
+.svc-row .svc-icon img{
+  width:40px;height:40px;object-fit:contain;display:block;
 }
 .svc-row .svc-arrow{font-size:40px;color:#025B97;padding-top:0;line-height:1;transition:transform .45s ease;font-weight:400;}
 .svc-row:hover .svc-arrow{transform:translateX(6px);}
@@ -133,9 +136,14 @@ html.is-scrolled .header-cta:hover{background:#025B97;color:#FFFFFF;}
 .faq-item summary::-webkit-details-marker{display:none;}
 .faq-item summary .icon{display:none !important;}
 .faq-item .faq-body{padding:0 22px 22px;color:#4D4E53;font-size:18px;line-height:1.7;}
+/* Keep services image sticky while the list scrolls */
+[data-screen-label="03 Services"] .svc-sticky-media{
+  position:sticky;top:100px;align-self:start;
+}
 @media (max-width:900px){
   .faq-wrap{grid-template-columns:1fr;}
   .faq-left{position:static;top:auto;}
+  [data-screen-label="03 Services"] .svc-sticky-media{position:static;top:auto;}
 }
 
 .form-panel{background:#F3F4F5;padding:clamp(28px,4vw,48px);border-radius:8px;}

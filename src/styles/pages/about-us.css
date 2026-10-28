@@ -75,8 +75,8 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 .find-col h3{margin:0;font-size:clamp(20px,1.8vw,26px);font-weight:700;line-height:1.25;color:#FFFFFF;letter-spacing:-0.01em;}
 .find-col p{margin:0;font-size:18px;line-height:1.65;color:#DCE6EF;}
 .find-col .fcta{
-  margin-top:auto;padding:12px 18px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
-  color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  margin-top:auto;align-self:center;padding:12px 18px;font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;
   border:1.5px solid rgba(255,255,255,0.7);border-radius:8px;background:transparent;
   transition:background .25s ease,color .25s ease,border-color .25s ease;
 }
@@ -133,19 +133,25 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
   flex-direction:column;
   gap:10px;
   min-height:100%;
+  min-width:0;
+  overflow:hidden;
 }
 .who-stat-label{
-  font-size:13px;
-  letter-spacing:0.18em;
+  font-size:12px;
+  letter-spacing:0.12em;
   text-transform:uppercase;
   color:#B59F61;
   font-weight:700;
+  line-height:1.35;
 }
 .who-stat-value{
-  font-size:clamp(17px,1.4vw,20px);
+  font-size:clamp(15px,1.25vw,18px);
   font-weight:700;
   color:#003F6B;
   line-height:1.35;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:manual;
 }
 @media (max-width:700px){
   .who-stats{grid-template-columns:1fr;}
