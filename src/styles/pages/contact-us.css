@@ -31,7 +31,7 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 }
 .form-error[hidden]{display:none !important;}
 .contact-form input.is-invalid,.contact-form select.is-invalid,.contact-form textarea.is-invalid{border-color:#C0392B !important;}
-.contact-aside .contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:17px;line-height:1.55;color:#1F2A36;transition:color .2s;}
+.contact-aside .contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:16px;line-height:1.55;color:#1F2A36;transition:color .2s;}
 .contact-aside .contact-line:first-of-type{margin-top:0;}
 .contact-aside .contact-line svg{flex:none;margin-top:2px;opacity:.85;transition:color .2s,opacity .2s;}
 .contact-aside .contact-line:hover,.contact-aside .contact-line:hover span{color:#025B97;}
@@ -45,18 +45,18 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 .footer-grid .logo-white{height:64px;width:auto;}
 .footer-col h4{margin:0;font-size:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E4D7AE;}
 .footer-col .links{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
-.footer-col .links a{font-size:17px;color:#C9D3DE;}
+.footer-col .links a{font-size:16px;color:#C9D3DE;}
 .footer-col .links a:hover{color:#fff;}
 .footer-contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:17px;line-height:1.55;color:#C9D3DE;}
 .footer-contact-line:first-of-type{margin-top:18px;}
 .footer-contact-line svg{flex:none;margin-top:2px;opacity:.85;}
 .footer-contact-line:hover{color:#fff;}
-.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:13px;color:#A9B7C6;}
+.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:16px;color:#A9B7C6;}
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
 @media (max-width:600px){.footer-grid{grid-template-columns:1fr;}}
 
 .footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:0;}
-.footer-legal a{color:#A9B7C6;font-size:13px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.footer-legal a{color:#A9B7C6;font-size:16px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 .footer-legal .sep{display:inline-block;width:1px;height:12px;background:rgba(255,255,255,.28);margin:0 14px;vertical-align:middle;}
 

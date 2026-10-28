@@ -12,18 +12,18 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 .footer-grid .logo-white{height:64px;width:auto;}
 .footer-col h4{margin:0;font-size:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E4D7AE;}
 .footer-col .links{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
-.footer-col .links a{font-size:17px;color:#C9D3DE;}
+.footer-col .links a{font-size:16px;color:#C9D3DE;}
 .footer-col .links a:hover{color:#fff;}
-.contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:17px;line-height:1.55;color:#C9D3DE;}
+.contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:16px;line-height:1.55;color:#C9D3DE;}
 .contact-line:first-of-type{margin-top:18px;}
 .contact-line svg{flex:none;margin-top:2px;opacity:.85;}
 .contact-line:hover{color:#fff;}
-.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:13px;color:#A9B7C6;}
+.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:16px;color:#A9B7C6;}
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
 @media (max-width:600px){.footer-grid{grid-template-columns:1fr;}}
 
 .footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:0;}
-.footer-legal a{color:#A9B7C6;font-size:13px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.footer-legal a{color:#A9B7C6;font-size:16px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 .footer-legal .sep{display:inline-block;width:1px;height:12px;background:rgba(255,255,255,.28);margin:0 14px;vertical-align:middle;}
 
@@ -42,7 +42,10 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
   transition:background .3s ease,border-top-color .3s ease,transform .3s ease;
   cursor:default;
 }
-.story-card .sicon{width:36px;height:36px;color:#003F6B;display:flex;align-items:center;justify-content:center;}
+.story-card .story-head{display:flex;align-items:center;gap:14px;}
+.story-card .sicon{flex:none;width:48px;height:48px;color:#003F6B;display:flex;align-items:center;justify-content:center;}
+.story-card .sicon img{width:44px;height:44px;object-fit:contain;display:block;transform:scale(1.08);transform-origin:center;}
+.story-card .sicon img[src*="tax-service"]{transform:scale(1.28);}
 .story-card h3{margin:0;font-size:clamp(20px,1.8vw,24px);font-weight:700;line-height:1.25;color:#003F6B;}
 .story-card .hint{margin:0;font-size:15px;line-height:1.5;color:#4D4E53;}
 .story-card .popup{

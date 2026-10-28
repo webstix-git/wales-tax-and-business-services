@@ -10,20 +10,20 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 .footer-main{padding:clamp(64px,8vw,96px) clamp(20px,5vw,48px) 36px;max-width:1280px;margin:0 auto;}
 .footer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;}
 .footer-grid .logo-white{height:64px;width:auto;}
-.footer-col h4{margin:0;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E4D7AE;}
+.footer-col h4{margin:0;font-size:16px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#E4D7AE;}
 .footer-col .links{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
-.footer-col .links a{font-size:17px;color:#C9D3DE;}
+.footer-col .links a{font-size:16px;color:#C9D3DE;}
 .footer-col .links a:hover{color:#fff;}
-.contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:17px;line-height:1.55;color:#C9D3DE;}
+.contact-line{display:flex;gap:12px;align-items:flex-start;margin-top:14px;font-size:16px;line-height:1.55;color:#C9D3DE;}
 .contact-line:first-of-type{margin-top:18px;}
 .contact-line svg{flex:none;margin-top:2px;opacity:.85;}
 .contact-line:hover{color:#fff;}
-.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:13px;color:#A9B7C6;}
+.footer-bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;font-size:16px;color:#A9B7C6;}
 @media (max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
 @media (max-width:600px){.footer-grid{grid-template-columns:1fr;}}
 
 .footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:0;}
-.footer-legal a{color:#A9B7C6;font-size:13px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.footer-legal a{color:#A9B7C6;font-size:16px;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
 .footer-legal a:hover{color:#fff;}
 .footer-legal .sep{display:inline-block;width:1px;height:12px;background:rgba(255,255,255,.28);margin:0 14px;vertical-align:middle;}
 
@@ -35,14 +35,16 @@ p{font-size:18px;line-height:1.7;color:#4D4E53;}
 .focus-tab:hover,.focus-tab.is-active{background:#003F6B;border-color:#003F6B;color:#FFFFFF;}
 .find-us-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:clamp(40px,5vw,56px);}
 .find-col{
-  text-align:left;padding:8px clamp(16px,2vw,28px);
-  display:flex;flex-direction:column;align-items:flex-start;gap:16px;
+  text-align:left;padding:12px clamp(20px,2.4vw,36px);
+  display:flex;flex-direction:column;align-items:flex-start;gap:20px;
   border-right:1px solid #CBCCCE;
+  min-width:0;
 }
 .find-col:last-child{border-right:0;}
-.find-col .find-head{display:flex;align-items:flex-start;gap:14px;width:100%;}
-.find-col .ficon{flex:none;width:34px;height:34px;margin-top:2px;color:#003F6B;display:flex;align-items:center;justify-content:center;}
-.find-col h3{margin:0;font-size:clamp(20px,1.7vw,24px);font-weight:700;line-height:1.25;color:#003F6B;}
+.find-col .find-head{display:flex;align-items:flex-start;gap:16px;width:100%;}
+.find-col .ficon{flex:none;width:44px;height:44px;margin-top:2px;color:#003F6B;display:flex;align-items:center;justify-content:center;}
+.find-col .ficon img{width:40px;height:40px;object-fit:contain;display:block;}
+.find-col h3{margin:0;font-size:clamp(18px,1.5vw,22px);font-weight:700;line-height:1.2;color:#003F6B;}
 .find-col p{margin:0;font-size:16px;line-height:1.65;color:#4D4E53;}
 .find-col .fcta{
   margin-top:auto;padding-top:8px;font-size:15px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
