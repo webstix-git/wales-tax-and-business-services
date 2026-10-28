@@ -1,0 +1,68 @@
+{
+  "home": {
+    "route": "/",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/home.css",
+    "mod": "@/generated/home"
+  },
+  "services": {
+    "route": "/services",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/services.css",
+    "mod": "@/generated/services"
+  },
+  "about-us": {
+    "route": "/about-us",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/about-us.css",
+    "mod": "@/generated/about-us"
+  },
+  "our-mission": {
+    "route": "/our-mission",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/our-mission.css",
+    "mod": "@/generated/our-mission"
+  },
+  "meet-the-team": {
+    "route": "/meet-the-team",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/meet-the-team.css",
+    "mod": "@/generated/meet-the-team"
+  },
+  "contact-us": {
+    "route": "/contact-us",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/contact-us.css",
+    "mod": "@/generated/contact-us"
+  },
+  "thank-you": {
+    "route": "/thank-you",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/thank-you.css",
+    "mod": "@/generated/thank-you"
+  },
+  "site-map": {
+    "route": "/site-map",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/site-map.css",
+    "mod": "@/generated/site-map"
+  },
+  "privacy-policy": {
+    "route": "/privacy-policy",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/privacy-policy.css",
+    "mod": "@/generated/privacy-policy"
+  },
+  "ai-policy": {
+    "route": "/ai-policy",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/ai-policy.css",
+    "mod": "@/generated/ai-policy"
+  },
+  "ai-readiness": {
+    "route": "/ai-readiness",
+    "title": "Wales Tax & Business Services",
+    "css": "@/styles/pages/ai-readiness.css",
+    "mod": "@/generated/ai-readiness"
+  }
+}
