@@ -7,6 +7,13 @@ html,body{overflow-x:clip;}
 img,video,svg{max-width:100%;height:auto;}
 .nav-toggle{display:none;}
 
+/* Keep split-section media inside the 1280px content column */
+.overview-grid,.overview-media,.overview-copy{min-width:0;max-width:100%;}
+[data-screen-label="05 Who we serve"] [style*="display:grid"] > *{min-width:0;max-width:100;}
+[data-screen-label="05 Who we serve"] [style*="aspect-ratio:4/5"]{
+  min-height:0 !important;width:100%;max-width:100%;box-sizing:border-box;
+}
+
 /* —— Header: transparent by default, solid when sticky (all breakpoints) —— */
 .site-header{
   background:transparent !important;
@@ -45,11 +52,15 @@ body.is-scrolled .site-logo img.logo-on-dark{display:none !important;}
 html.is-scrolled .site-logo img.logo-on-light,
 body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
 
-/* —— Tablet & mobile header (collapse to hamburger) —— */
+/* Drawer is transparent in the box tree on desktop so nav + CTA keep the header grid */
+.nav-drawer{display:contents;}
+.nav-backdrop{display:none;}
+
+/* —— Tablet & mobile header (slide-in side drawer) —— */
 @media (max-width:1024px){
   html body .site-header .header-inner{
     display:flex !important;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     align-items:center;
     justify-content:space-between !important;
     justify-items:unset !important;
@@ -57,7 +68,7 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
     gap:12px 16px;
     position:relative;
   }
-  html body .site-header .site-logo{order:1;flex:0 0 auto;}
+  html body .site-header .site-logo{order:1;flex:0 0 auto;position:relative;z-index:125;}
   html body .site-header .site-logo img,
   html body .site-header .site-logo img.logo-on-dark,
   html body .site-header .site-logo img.logo-on-light{height:56px;}
@@ -76,7 +87,8 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
     background:transparent;
     cursor:pointer;
     flex:0 0 auto;
-    z-index:2;
+    z-index:130;
+    position:relative;
   }
   html.is-scrolled body .nav-toggle{
     border-color:#CBCCCE;
@@ -98,63 +110,93 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
     transform:translateY(-7px) rotate(-45deg);
   }
 
+  html body .nav-backdrop{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:110;
+    background:rgba(0,18,36,.5);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .28s ease;
+  }
+  html.nav-open body .nav-backdrop{
+    opacity:1;
+    pointer-events:auto;
+  }
+  html body .nav-backdrop[hidden]{display:block !important;}
+
+  html body .site-header .nav-drawer{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:8px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:auto;
+    height:100vh;
+    height:100dvh;
+    width:min(360px,86vw);
+    z-index:120;
+    margin:0;
+    padding:96px 28px 32px;
+    box-sizing:border-box;
+    background:#0B2A44;
+    box-shadow:16px 0 40px rgba(0,18,36,.28);
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    transform:translateX(-100%);
+    visibility:hidden;
+    pointer-events:none;
+    transition:transform .3s ease,visibility 0s linear .3s;
+  }
+  html.nav-open body .site-header .nav-drawer{
+    transform:translateX(0);
+    visibility:visible;
+    pointer-events:auto;
+    transition:transform .3s ease,visibility 0s linear 0s;
+  }
+
   html body .site-header .site-nav{
-    order:3;
-    display:none;
+    display:flex;
     width:100%;
     flex-direction:column;
     align-items:stretch;
     justify-content:flex-start;
     flex-wrap:nowrap;
     gap:0;
-    padding:8px 0 4px;
-    border-top:1px solid rgba(255,255,255,.18);
+    padding:0;
+    border-top:0;
     font-size:17px;
   }
-  html.is-scrolled body .site-header .site-nav{
-    border-top-color:#E3E4E6;
-  }
-  html.nav-open body .site-header .site-nav{display:flex;}
   html body .site-header .site-nav a{
+    color:#FFFFFF !important;
     padding:14px 4px;
     border-bottom:1px solid rgba(255,255,255,.12);
   }
-  html.is-scrolled body .site-header .site-nav a{
-    border-bottom-color:#E8EAEC;
-  }
+  html body .site-header .site-nav a:hover{color:#E4D7AE !important;}
   html body .site-header .site-nav a:last-child{border-bottom:0;}
   html body .site-header .site-nav a.active{
+    color:#FFFFFF !important;
     border-bottom:1px solid rgba(255,255,255,.12);
     padding-bottom:14px;
   }
-  html.is-scrolled body .site-header .site-nav a.active{
-    border-bottom-color:#E8EAEC;
-  }
 
   html body .site-header .header-cta{
-    order:4;
-    display:none;
+    display:inline-flex;
     width:100%;
     justify-content:center;
-    margin:8px 0 4px;
+    margin:16px 0 0;
     box-sizing:border-box;
+    background:#FFFFFF !important;
+    color:#003F6B !important;
   }
-  html.nav-open body .site-header .header-cta{display:inline-flex;}
+  html body .site-header .header-cta:hover{
+    background:#E6ECF2 !important;
+    color:#003F6B !important;
+  }
 
-  /* Solid panel when menu open so links stay readable over hero */
-  html.nav-open body .site-header{
-    background:#0B2A44 !important;
-    border-bottom-color:rgba(255,255,255,.12) !important;
-    box-shadow:0 12px 32px rgba(0,42,75,.35) !important;
-    max-height:100vh;
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-  }
-  html.nav-open.is-scrolled body .site-header{
-    background:#ffffff !important;
-    border-bottom-color:#E3E4E6 !important;
-    box-shadow:0 8px 30px rgba(0,42,75,.12) !important;
-  }
   html.nav-open body{overflow:hidden;}
 }
 
@@ -176,7 +218,17 @@ body.is-scrolled .site-logo img.logo-on-light{display:block !important;}
   .faq-left{position:static !important;top:auto !important;}
   .svc-nav-aside{position:static !important;}
   [data-screen-label="03 Services"] .svc-sticky-media{position:static !important;top:auto !important;}
-  .overview-media{min-height:280px;aspect-ratio:4/3;}
+  .overview-grid{width:100%;max-width:min(1280px,100%);box-sizing:border-box;min-width:0;}
+  .overview-media{
+    min-width:0;width:100%;max-width:100%;
+    height:auto !important;min-height:0 !important;aspect-ratio:4/3;
+  }
+  [data-screen-label="05 Who we serve"] [style*="max-width:1280px"]{
+    max-width:min(1280px,100%);box-sizing:border-box;
+  }
+  [data-screen-label="05 Who we serve"] [style*="aspect-ratio:4/5"]{
+    min-height:0 !important;width:100%;max-width:100%;box-sizing:border-box;
+  }
   .find-col{border-right:0 !important;border-bottom:1px solid #CBCCCE;padding-bottom:28px;margin-bottom:20px;}
   .find-us-band .find-col{border-bottom-color:rgba(255,255,255,0.18);}
   .find-col:last-child{border-bottom:0 !important;margin-bottom:0;padding-bottom:8px;}

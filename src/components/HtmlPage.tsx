@@ -11,6 +11,7 @@ type Props = {
 
 const NAV_TOGGLE_HTML =
   '<button type="button" class="nav-toggle" aria-controls="siteNav" aria-expanded="false" aria-label="Open menu"><span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span></button>';
+const NAV_BACKDROP_HTML = '<div class="nav-backdrop" hidden></div>';
 
 function parseStyleHover(raw: string): Record<string, string> {
   const out: Record<string, string> = {};
@@ -39,6 +40,12 @@ function enhanceHeaderHtml(source: string): string {
       `$1${NAV_TOGGLE_HTML}`
     );
   }
+  if (!out.includes("nav-drawer")) {
+    out = out.replace(
+      /(<nav class="site-nav"[^>]*>[\s\S]*?<\/nav>)\s*(<a href="[^"]*" class="header-cta">[\s\S]*?<\/a>)/g,
+      `${NAV_BACKDROP_HTML}<div class="nav-drawer">$1$2</div>`
+    );
+  }
   return out;
 }
 
@@ -64,6 +71,10 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
         btn.setAttribute("aria-expanded", open ? "true" : "false");
         btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       });
+      root.querySelectorAll<HTMLElement>(".nav-backdrop").forEach((el) => {
+        el.hidden = !open;
+        el.setAttribute("aria-hidden", open ? "false" : "true");
+      });
     };
     setNavOpen(false);
     const onToggleClick = (e: MouseEvent) => {
@@ -71,6 +82,11 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
       if (!btn || !root.contains(btn)) return;
       e.preventDefault();
       setNavOpen(!document.documentElement.classList.contains("nav-open"));
+    };
+    const onBackdropClick = (e: MouseEvent) => {
+      const backdrop = (e.target as Element | null)?.closest?.(".nav-backdrop");
+      if (!backdrop || !root.contains(backdrop)) return;
+      setNavOpen(false);
     };
     const onNavLinkClick = (e: MouseEvent) => {
       const a = (e.target as Element | null)?.closest?.(".site-nav a, .header-cta");
@@ -84,11 +100,13 @@ export default function HtmlPage({ html, css = "", page = "" }: Props) {
       if (window.innerWidth > 1024) setNavOpen(false);
     };
     document.addEventListener("click", onToggleClick, true);
+    document.addEventListener("click", onBackdropClick, true);
     document.addEventListener("click", onNavLinkClick, true);
     document.addEventListener("keydown", onKeyDown);
     window.addEventListener("resize", onResize);
     cleanups.push(() => {
       document.removeEventListener("click", onToggleClick, true);
+      document.removeEventListener("click", onBackdropClick, true);
       document.removeEventListener("click", onNavLinkClick, true);
       document.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("resize", onResize);
